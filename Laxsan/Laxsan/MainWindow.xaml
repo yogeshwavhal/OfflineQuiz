@@ -1,0 +1,98 @@
+﻿<Window x:Class="Laxsan.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Laxsan"
+        xmlns:view="clr-namespace:Laxsan.Views"
+        xmlns:vm="clr-namespace:Laxsan.ViewModels"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+       Style="{StaticResource WindowStyle}"
+        Title="Laxsan" Height="450" Width="800">
+
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type vm:QuestionViewModel}">
+            <view:QuestionView />
+        </DataTemplate>
+        
+        <Style x:Key="TitleText" TargetType="{x:Type Label}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="18"/>
+        </Style>
+   
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" Background="Gray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+            
+            <Label Name="lblTimerLbl" 
+               Grid.Row="0" Grid.Column="1"
+               Style="{StaticResource TitleText}"
+               HorizontalContentAlignment="Right"
+               FontSize="30"
+               VerticalAlignment="Center"
+               Content="Test will end in :"/>
+            
+            <Label Name="lblTimerValue" 
+               Grid.Row="0" Grid.Column="2"
+               VerticalAlignment="Center"
+               HorizontalContentAlignment="Left"
+               FontSize="30"
+               Style="{StaticResource TitleText}"
+               Content="{Binding CurrentTime}"/>
+            
+            <Button x:Name="BtnSubmitTest" 
+                    Grid.Column="4"
+                    Margin="0,0,5,0"
+                    Content="Submit Test" 
+                    Command="{Binding SubmitTestCommand}"
+                    Style="{StaticResource ButtonStyle}"/>
+        </Grid>
+
+        <Grid x:Name="MainContent" Margin="10,0,10,0"
+              Grid.Row="2" Grid.Column="0">
+            <ContentControl Content="{Binding CurrentQuestionViewModel}" />
+        </Grid>
+        
+        <Grid 
+            Grid.Row="5" Grid.Column="0" Background="Gray">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="prevQuestionBtn"
+                    Grid.Column="1"
+                    Style="{StaticResource ButtonStyle}"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Left"
+                    Content="Prev"
+                    Command="{Binding PrevQuestionCommand}"/>
+            
+            <Button Name="nextQuestionBtn"
+                    Grid.Column="3"
+                    Style="{StaticResource ButtonStyle}"
+                    VerticalAlignment="Center" 
+                    HorizontalAlignment="Right"
+                    Content="Next"
+                    Command="{Binding NextQuestionCommand}"/>
+        </Grid>
+    </Grid>
+</Window>
