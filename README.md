@@ -18,3 +18,9 @@ Technical Details :
 8. Comments are added to the for more information  
 
 
+Use below details for login into the app
+
+UserName = admin
+Password = admin
+
+
